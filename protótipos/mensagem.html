@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salvar e Ler Texto no Firebase Realtime Database</title>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js';
+        import { getDatabase, ref, set, onValue } from 'https://www.gstatic.com/firebasejs/10.3.0/firebase-database.js';
+
+        // Suas credenciais do Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBrRuiOk8rjxO6jH91v--LPuwwyIrZPiH8",
+            authDomain: "bdreporttec.firebaseapp.com",
+            databaseURL: "https://bdreporttec-default-rtdb.firebaseio.com",
+            projectId: "bdreporttec",
+            storageBucket: "bdreporttec.appspot.com",
+            messagingSenderId: "153475202057",
+            appId: "1:153475202057:web:2fa40b7f784e765b940cd8",
+            measurementId: "G-LX51TDQBJM"
+        };
+
+        // Inicializa o Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        
+        // Função para sanitizar o caminho
+        function sanitizePath(path) {
+            return path.replace(/[.#$[\]]/g, '_'); // Substitui caracteres inválidos por '_'
+        }
+
+        // Função para salvar o texto
+        function saveText() {
+            const textInput = document.getElementById('textInput').value;
+            const timestamp = new Date().toISOString();
+            const sanitizedTimestamp = sanitizePath(timestamp); // Sanitiza o timestamp
+            const newTextRef = ref(database, 'textos/' + sanitizedTimestamp); // Usa o timestamp sanitizado
+            set(newTextRef, {
+                texto: textInput,
+                timestamp: timestamp
+            }).then(() => {
+                alert('Texto salvo com sucesso!');
+                document.getElementById('textInput').value = '';
+                loadTexts(); // Atualiza a lista de textos
+            }).catch((error) => {
+                alert('Erro ao salvar texto: ' + error.message);
+            });
+        }
+
+        // Função para carregar e exibir os textos
+        function loadTexts() {
+            const textsRef = ref(database, 'textos');
+            onValue(textsRef, (snapshot) => {
+                const texts = snapshot.val();
+                const textsContainer = document.getElementById('textsContainer');
+                textsContainer.innerHTML = ''; // Limpa o conteúdo atual
+
+                if (texts) {
+                    Object.keys(texts).forEach(key => {
+                        const text = texts[key];
+                        const textElement = document.createElement('div');
+                        textElement.classList.add('text-item');
+                        textElement.innerHTML = `
+                            <p><strong>Timestamp:</strong> ${text.timestamp}</p>
+                            <p><strong>Texto:</strong> ${text.texto}</p>
+                            <hr>
+                        `;
+                        textsContainer.appendChild(textElement);
+                    });
+                } else {
+                    textsContainer.innerHTML = '<p>Nenhum texto encontrado.</p>';
+                }
+            }, {
+                onlyOnce: true
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('button').addEventListener('click', saveText);
+            loadTexts(); // Carrega os textos ao carregar a página
+        });
+
+    </script>
+
+    <style>
+        .text-item {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Salvar e Ler Texto no Firebase Realtime Database</h1>
+    <textarea id="textInput" rows="4" cols="50" placeholder="Digite seu texto aqui"></textarea><br>
+    <button>Salvar Texto</button>
+    
+    <h2>Textos Salvos:</h2>
+    <div id="textsContainer"></div>
+</body>
+</html>

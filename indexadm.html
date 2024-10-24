@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ReportTecADM</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <link rel="stylesheet" href="css/adm/estiloadm.css" />
+
+    <link rel="stylesheet" href="css/user/header/navbar.css" />
+    <link rel="stylesheet" href="css/adm/header/navigation.css" />
+    <link rel="stylesheet" href="css/adm/header/filter.css" />
+
+    <link rel="stylesheet" href="css/adm/container/style.css" />
+    <link rel="stylesheet" href="css/adm/container/comentario/style.css" />
+
+    <style>
+      #myChart {
+        width: 50vh;
+        height: 400px;
+        background-color: #f5f5f5;
+      }
+      #mypieChart {
+        width: 50vh;
+        height: 400px;
+        background-color: #f5f5f5;
+      }
+      header {
+        text-align: center;
+      }
+      h2 {
+        text-align: center;
+        margin: 20px 0;
+      }
+    </style>
+    <script src="js/dropdown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/loadTexts.js" type="module"></script>
+    <script src="js/chart.js" type="module"></script>
+    <script src="js/chartpie.js" type="module"></script>
+  </head>
+  <body>
+    <header class="navbar">
+      <img
+        class="logo"
+        src="imgs/logobranca.png"
+        width="120"
+        height="50"
+        alt="Logo"
+      />
+      <h2 class="navigation" href="#" onclick="toggleForm()">Mensagens</h2>
+    </header>
+    <div class="filter">
+      <div class="filter-box">
+        <div class="filter-section">
+          <label for="startDate">Data Inicial</label>
+          <input type="date" id="startDate" />
+        </div>
+        <div class="filter-section">
+          <label for="endDate">Data Final</label>
+          <input type="date" id="endDate" />
+        </div>
+        <button id="filterButton">Filtrar</button>
+      </div>
+      <h2>Gráfico</h2>
+    </div>
+
+    <div id="textsContainer">
+      <!-- 
+      <div class="box">
+        <div class="box-content">
+          <div class="text-item">
+            <p>16/10/2024</p>
+            <p>
+              A professora Karla fez bullying com o meu bigodinho, isso me
+              afetou muita psicologicamente.
+            </p>
+          </div>
+          <div class="comentario">
+            <textarea id="textanotacao-${key}" placeholder="Digite algo...">
+            </textarea>
+            <div class="actions">
+              <select id="classificacao-${key}" name="options" size="1">
+                <option value="Assédio">Assédio</option>
+                <option value="Cyberbullying">Cyberbullying</option>
+                <option value="Racismo">Racismo</option>
+                <option value="Opção 4">Opção 4</option>
+                <option value="Opção 5">Opção 5</option>
+              </select>
+              <select id="estado-${key}" name="options" size="1">
+                <option value="Andamento">Andamento</option>
+                <option value="Resolvido">Resolvido</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="buttons">
+          <button data-id="${key}">Excluir</button>
+          <button data-id="${key}">Salvar</button>
+        </div>
+      </div>
+      -->
+    </div>
+
+    <h2>Gráfico de Classificações</h2>
+    <div>
+      <canvas id="myChart"></canvas>
+    </div>
+
+    <h2>Gráfico de Estado</h2>
+    <div>
+      <canvas id="myPieChart"></canvas>
+    </div>
+  </body>
+</html>

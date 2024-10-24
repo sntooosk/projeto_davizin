@@ -1,0 +1,80 @@
+
+.subnavbar {
+  display: flex; /* Usa flexbox para o layout da subbarra de navegação */
+  justify-content: center; /* Centraliza os itens horizontalmente */
+  align-items: center; /* Alinha os itens verticalmente */
+  background-color: var(--cor-preto); /* Cor de fundo da subbarra */
+  padding: 10px 20px; /* Adiciona preenchimento à subbarra */
+  position: relative; /* Permite posicionamento absoluto de elementos internos */
+}
+
+.subnav-links {
+  list-style: none; /* Remove marcadores da lista */
+  display: flex; /* Usa flexbox para itens da subbarra */
+  justify-content: center; /* Centraliza os itens horizontalmente */
+  align-items: center; /* Alinha os itens verticalmente */
+  padding: 0; /* Remove preenchimento da lista */
+  margin: 0; /* Remove margem da lista */
+}
+
+.subnav-links li {
+  margin: 10px 15px; /* Adiciona margem aos itens da lista */
+}
+
+.subnav-links a {
+  text-decoration: none; /* Remove o sublinhado dos links */
+  color: var(--cor-branco); /* Cor do texto dos links da subbarra */
+  font-size: 1rem; /* Tamanho da fonte dos links da subbarra */
+  padding: 5px; /* Adiciona preenchimento aos links da subbarra */
+  transition: color 0.3s; /* Transição suave na cor */
+}
+
+.subnav-links a:hover {
+  background-color: var(--cor-verde); /* Fundo ao passar o mouse sobre os links da subbarra */
+  border-radius: 5px; /* Arredonda os cantos do fundo */
+}
+
+.menu-toggle {
+  display: none; /* Oculta o botão de menu inicialmente */
+  background-color: var(--cor-branco); /* Cor de fundo do botão */
+  color: var(--cor-preto); /* Cor do texto do botão */
+  border: none; /* Remove a borda padrão do botão */
+  padding: 10px 15px; /* Adiciona preenchimento ao botão */
+  cursor: pointer; /* Muda o cursor ao passar sobre o botão */
+  z-index: 1001; /* Coloca o botão acima de outros elementos */
+  margin-left: auto; /* Alinha o botão à direita */
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+      display: block; /* Exibe o botão de menu em telas menores */
+  }
+}
+
+@media (max-width: 1010px) {
+  .menu-toggle {
+      display: block; /* Exibe o botão de menu em telas pequenas */
+  }
+
+  .subnav-links {
+      flex-direction: column; /* Alinha os links da subbarra em coluna */
+      position: absolute; /* Posiciona a subbarra de forma absoluta */
+      top: 50px; /* Alinha a subbarra abaixo da navbar */
+      right: 0; /* Alinha à direita */
+      background-color: var(--cor-preto); /* Cor de fundo da subbarra */
+      width: 100vw; /* Largura total da viewport */
+      max-width: 300px; /* Largura máxima da subbarra */
+      display: none; /* Oculta a subbarra inicialmente */
+      padding: 10px; /* Adiciona preenchimento à subbarra */
+      z-index: 1000; /* Coloca a subbarra acima de outros elementos */
+  }
+
+  .subnav-links.active {
+      display: flex; /* Mostra a subbarra se ativa */
+      align-items: flex-start; /* Alinha os itens da subbarra no início */
+  }
+
+  .subnav-links.active li {
+      margin: 10px 0; /* Ajusta a margem dos itens da subbarra */
+  }
+}

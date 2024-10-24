@@ -1,0 +1,40 @@
+.container-game {
+  text-align: center; /* Centraliza o texto dentro do contêiner do jogo */
+  padding: 5px; /* Adiciona preenchimento ao contêiner do jogo */
+  border-radius: 8px; /* Arredonda os cantos do contêiner do jogo */
+  max-width: 300px; /* Largura máxima do contêiner do jogo */
+  width: 100%; /* Largura total do contêiner do jogo */
+}
+
+.question {
+  font-size: 1.5em; /* Tamanho da fonte da pergunta */
+  margin-bottom: 5px; /* Adiciona margem inferior à pergunta */
+}
+
+.options {
+  margin-top: 0px; /* Adiciona margem superior ao bloco de opções */
+  text-align: left; /* Alinha o texto das opções à esquerda */
+}
+
+.options button {
+  background-color: var(--cor-verde); /* Cor de fundo do botão de opção */
+  color: var(--cor-branco); /* Cor do texto do botão de opção */
+  border: none; /* Remove a borda padrão do botão */
+  border-radius: 5px; /* Arredonda os cantos do botão */
+  padding: 10px 20px; /* Adiciona preenchimento ao botão */
+  margin: 5px 0; /* Adiciona margem vertical ao botão */
+  cursor: pointer; /* Muda o cursor ao passar sobre o botão */
+  font-size: 1em; /* Tamanho da fonte do botão */
+  width: 100%; /* Largura total do botão */
+  text-align: left; /* Alinha o texto do botão à esquerda */
+}
+
+.options button:hover {
+  opacity: 0.6;
+  transition: .25s;
+}
+
+.message {
+  margin-top: 20px; /* Adiciona margem superior à mensagem */
+  font-size: 1em; /* Tamanho da fonte da mensagem */
+}

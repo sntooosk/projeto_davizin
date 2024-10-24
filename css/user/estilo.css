@@ -1,0 +1,134 @@
+main {
+    padding: 20px; /* Adiciona preenchimento ao elemento principal */
+}
+
+section {
+    margin-bottom: 20px; /* Adiciona margem inferior entre seções */
+}
+
+textarea {
+    resize: none; /* Desativa a opção de redimensionar a área de texto */
+    width: 300px; /* Define a largura da área de texto */
+    height: 150px; /* Define a altura da área de texto */
+}
+
+.form-borda {
+    top: 0px; /* Posiciona o formulário no topo */
+    position: absolute; /* Posiciona o formulário de forma absoluta */
+    width: 100%; /* Largura total da tela */
+    min-height: 100vh; /* Altura mínima de 100% da altura da tela */
+    background-color: rgba(0, 0, 0, 0.75); /* Fundo semi-transparente */
+    z-index: 2;
+}
+
+.form-container {
+    position: fixed; /* Posiciona o contêiner do formulário de forma fixa */
+    top: 50%; /* Centraliza verticalmente */
+    left: 50%; /* Centraliza horizontalmente */
+    transform: translate(-50%, -50%); /* Ajusta a posição para centralização perfeita */
+    background-color: var(--cor-caqui); /* Cor de fundo do contêiner */
+    padding: 20px; /* Adiciona preenchimento ao contêiner */
+    border-radius: 8px; /* Arredonda os cantos do contêiner */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.75); /* Adiciona sombra ao contêiner */
+    width: 100%; /* Largura total */
+    max-width: 400px; /* Largura máxima */
+    z-index: 1000; /* Coloca o contêiner acima de outros elementos */
+}
+
+.form h1 {
+    color: var(--cor-preto); /* Cor do título do formulário */
+    text-align: center; /* Centraliza o título */
+    margin-bottom: 20px; /* Adiciona margem inferior ao título */
+}
+
+.form-group {
+    margin-bottom: 15px; /* Adiciona margem inferior entre grupos de formulário */
+}
+
+.form-group label {
+    display: block; /* Faz o rótulo ocupar uma linha inteira */
+    margin-bottom: 5px; /* Adiciona margem inferior ao rótulo */
+    color: var(--cor-preto); /* Cor do texto do rótulo */
+}
+
+.form-group input {
+    width: 100%; /* Largura total do campo de entrada */
+    padding: 10px; /* Adiciona preenchimento ao campo de entrada */
+    border: 1px solid var(--cor-osso); /* Borda do campo de entrada */
+    border-radius: 4px; /* Arredonda os cantos do campo de entrada */
+    background-color: var(--cor-caqui); /* Cor de fundo do campo de entrada */
+    color: var(--cor-preto); /* Cor do texto do campo de entrada */
+}
+
+.form-group input:focus {
+    border-color: var(--cor-verde); /* Muda a cor da borda ao focar no campo */
+    outline: none; /* Remove o contorno padrão ao focar */
+}
+
+.form-group button {
+    width: 100%; /* Largura total do botão */
+    padding: 10px; /* Adiciona preenchimento ao botão */
+    border: none; /* Remove a borda padrão do botão */
+    border-radius: 4px; /* Arredonda os cantos do botão */
+    background-color: var(--cor-verde); /* Cor de fundo do botão */
+    color: var(--cor-preto); /* Cor do texto do botão */
+    font-size: 16px; /* Tamanho da fonte do botão */
+    cursor: pointer; /* Muda o cursor ao passar sobre o botão */
+}
+
+.form-group button:hover {
+    background-color: var(--cor-osso); /* Muda a cor do botão ao passar o mouse */
+}
+
+.form-group-exit {
+    width: 100%; /* Largura total do grupo de saída */
+    display: flex; /* Flexbox para alinhamento */
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    align-items: center; /* Centraliza o conteúdo verticalmente */
+}
+
+.form-group-exit p {
+    cursor: pointer; /* Muda o cursor ao passar sobre o texto */
+}
+
+/* Media queries para responsividade */
+
+@media (max-width: 768px) {
+    .main-progress-bar,
+    .main-score {
+        width: 90%; /* Largura de 90% em telas menores */
+        max-width: 100%; /* Largura máxima de 100% */
+    }
+}
+
+@media (max-width: 600px) {
+    .login-container {
+        padding: 15px; /* Adiciona preenchimento à contêiner de login em telas menores */
+    }
+
+    .form-group button {
+        font-size: 14px; /* Reduz o tamanho da fonte do botão em telas menores */
+    }
+}
+
+@media (max-width: 768px) {
+    header,
+    footer {
+        padding: 15px; /* Ajusta o preenchimento do cabeçalho e rodapé em telas menores */
+    }
+
+    main {
+        padding: 15px; /* Ajusta o preenchimento do elemento principal em telas menores */
+    }
+}
+
+@media (max-width: 480px) {
+    header h1,
+    footer p {
+        font-size: 1.2em; /* Reduz o tamanho da fonte do cabeçalho e rodapé em telas menores */
+    }
+
+    main {
+        padding: 10px; /* Ajusta o preenchimento do elemento principal em telas muito pequenas */
+    }
+}

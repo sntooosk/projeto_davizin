@@ -1,0 +1,17 @@
+.navigation{
+  font-size: 1.2rem;
+
+  padding: 5px 10px;
+  
+  color: #ffffff;
+  background: #20ad0d;
+
+  border-radius: 5px;
+
+  text-decoration: none;
+}
+
+.navigation:hover{
+  opacity: .6;
+  transition: .25s;
+}

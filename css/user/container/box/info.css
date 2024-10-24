@@ -1,0 +1,15 @@
+.box-info{ 
+  min-height: 250px;
+
+  width: 350px;
+
+  text-align: justify;
+
+  row-gap: 25px;
+}
+
+@media (max-width: 500px) {
+  .box-info{
+    width: 250px;
+  }   
+}

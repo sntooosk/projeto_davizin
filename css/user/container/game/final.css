@@ -1,0 +1,20 @@
+.final-screen {
+  display: none; /* Inicialmente oculta a tela final */
+  text-align: center; /* Centraliza o texto na tela final */
+}
+
+.final-screen button {
+  background-color: var(--cor-verde); /* Cor de fundo do botão na tela final */
+  color: var(--cor-branco); /* Cor do texto do botão na tela final */
+  border: none; /* Remove a borda padrão do botão */
+  border-radius: 5px; /* Arredonda os cantos do botão */
+  padding: 10px 20px; /* Adiciona preenchimento ao botão */
+  margin: 5px; /* Adiciona margem ao botão */
+  cursor: pointer; /* Muda o cursor ao passar sobre o botão */
+  font-size: 1em; /* Tamanho da fonte do botão na tela final */
+}
+
+.final-screen button:hover {
+  opacity: 0.6; /* Muda a cor do botão ao passar o mouse na tela final */
+  transition: .25s;
+}

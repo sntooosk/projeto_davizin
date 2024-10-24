@@ -1,0 +1,66 @@
+body {
+    font-family: Arial, sans-serif; /* Define a fonte do corpo */
+    margin: 0; /* Remove a margem padrão */
+    padding: 0; /* Remove o preenchimento padrão */
+    box-sizing: border-box; /* Inclui padding e bordas no tamanho total dos elementos */
+}
+
+h1 {
+    margin: 0; /* Remove a margem do título */
+    font-size: 1.5rem; /* Tamanho da fonte do título */
+}
+
+h2 {
+    margin: 0; /* Remove a margem do subtítulo */
+    font-size: 1.25rem; /* Tamanho da fonte do subtítulo */
+    padding: 10px 0; /* Preenchimento vertical do subtítulo */
+    text-align: center; /* Alinha o texto do subtítulo ao centro */
+}
+
+.text-item p {
+    margin: 0; /* Remove a margem do parágrafo dentro do item de texto */
+}
+
+.text-item input {
+    margin: 10px 0; /* Margem vertical ao redor do input */
+    padding: 5px; /* Preenchimento interno do input */
+    border: 1px solid #ccc; /* Borda do input */
+    border-radius: 4px; /* Arredonda os cantos do input */
+    width: 100%; /* Largura total do input */
+}
+
+/* Media queries para responsividade */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column; /* Alinha a barra de navegação em coluna */
+        align-items: flex-start; /* Alinha os itens à esquerda */
+    }
+
+    .text-item {
+        flex-direction: column; /* Alinha os itens de texto em coluna */
+        align-items: flex-start; /* Alinha os itens à esquerda */
+    }
+
+    .actions {
+        flex-direction: column; /* Alinha as ações em coluna */
+        align-items: flex-start; /* Alinha os itens à esquerda */
+    }
+
+    .actions button {
+        width: 100%; /* Botão ocupa 100% da largura em telas menores */
+        margin-bottom: 10px; /* Margem inferior entre os botões de ações */
+    }
+}
+
+@media (max-width: 768px) {
+    .text-wrapper {
+        flex-direction: column; /* Alinha o wrapper de texto em coluna */
+    }
+
+    .text-item, .comentario {
+        max-width: 100%; /* Remove a largura máxima nos itens de texto e comentários */
+        width: 100%; /* Largura total dos itens de texto e comentários */
+        margin-right: 0; /* Remove a margem à direita */
+        margin-bottom: 10px; /* Margem inferior entre itens de texto e comentários */
+    }
+}

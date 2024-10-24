@@ -1,0 +1,35 @@
+.progress {
+  display: flex; /* Usa flexbox para o layout do progresso */
+  flex-direction: column; /* Alinha os itens em coluna */
+  align-items: center; /* Centraliza os itens horizontalmente */
+  position: relative; /* Permite posicionamento absoluto dos filhos */
+}
+
+.main-progress-bar {
+  width: 100%; /* Largura total da barra de progresso principal */
+  max-width: 600px; /* Largura máxima da barra de progresso principal */
+  background-color: var(--cor-branco); /* Cor de fundo da barra de progresso principal */
+  border-radius: 5px; /* Arredonda os cantos da barra de progresso principal */
+  height: 20px; /* Altura da barra de progresso principal */
+  position: relative; /* Permite posicionamento absoluto dos filhos */
+  margin-bottom: 10px; /* Adiciona margem inferior à barra de progresso principal */
+}
+
+.main-progress-bar span {
+  display: block; /* Exibe o span como bloco */
+  height: 100%; /* Altura total do span */
+  background-color: rgb(0, 200, 0); /* Cor de fundo do span (progresso) */
+  width: 0; /* Largura inicial do span (0% de progresso) */
+  border-radius: 5px; /* Arredonda os cantos do span */
+  position: absolute; /* Posiciona o span de forma absoluta */
+  top: 0; /* Posiciona no topo da barra */
+  left: 0; /* Posiciona à esquerda da barra */
+}
+
+.main-score {
+  font-size: 1em; /* Tamanho da fonte da pontuação principal */
+  text-align: center; /* Centraliza o texto da pontuação principal */
+  width: 100%; /* Largura total da pontuação principal */
+  max-width: 600px; /* Largura máxima da pontuação principal */
+  margin: 0 auto; /* Centraliza horizontalmente */
+}

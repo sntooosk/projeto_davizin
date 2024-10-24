@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px 0;
+        }
+        .login-container .login-btn {
+            background-color: #007BFF;
+        }
+        .login-container .login-btn:hover {
+            background-color: #0056b3;
+        }
+        .login-container .register-btn {
+            background-color: #28a745;
+        }
+        .login-container .register-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2 id="form-title">Login</h2>
+        <form id="auth-form">
+            <input type="text" id="username" placeholder="Nome de usuário" required>
+            <input type="password" id="password" placeholder="Senha" required>
+            <button type="button" class="login-btn" id="login">Entrar</button>
+            <button type="button" class="register-btn" id="registro">Registrar</button>
+        </form>
+    </div>
+
+    <!-- Firebase scripts -->
+    <script type="module">
+        // Importar módulos do Firebase
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js';
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.3.0/firebase-auth.js';
+        import { getDatabase, ref, set } from 'https://www.gstatic.com/firebasejs/10.3.0/firebase-database.js';
+
+        // Configuração do Firebase
+        const firebaseConfig = {
+  apiKey: "AIzaSyBrRuiOk8rjxO6jH91v--LPuwwyIrZPiH8",
+  authDomain: "bdreporttec.firebaseapp.com",
+  databaseURL: "https://bdreporttec-default-rtdb.firebaseio.com",
+  projectId: "bdreporttec",
+  storageBucket: "bdreporttec.appspot.com",
+  messagingSenderId: "153475202057",
+  appId: "1:153475202057:web:2fa40b7f784e765b940cd8",
+  measurementId: "G-LX51TDQBJM"
+};
+
+        // Inicializar o Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const database = getDatabase(app);
+
+        // Função para registrar um novo usuário
+        function registerUser(email, password) {
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    console.log('Usuário registrado:', user);
+                    set(ref(database, 'users/' + user.uid), {
+                        email: user.email,
+                    });
+                })
+                .catch((error) => {
+                    console.error('Erro ao registrar usuário:', error.code, error.message);
+                });
+        }
+
+        // Função para fazer login
+        function loginUser(email, password) {
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    console.log('Usuário logado:', user);
+                })
+                .catch((error) => {
+                    console.error('Erro ao fazer login:', error.code, error.message);
+                });
+        }
+
+        document.querySelector("#login").addEventListener("click", () => {
+            login()
+        })
+
+        document.querySelector("#registro").addEventListener("click", () => {
+            register()
+        })
+
+        // Função chamada pelo botão de login
+        function login() {
+            console.log("teste")
+            const email = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            loginUser(email, password);
+        }
+
+        // Função chamada pelo botão de registro
+        function register() {
+            const email = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            registerUser(email, password);
+        }
+    </script>
+</body>
+</html>

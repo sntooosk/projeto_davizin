@@ -1,0 +1,28 @@
+.progress-container {
+  margin-top: 20px; /* Adiciona margem superior ao contêiner de progresso */
+  text-align: center; /* Centraliza o texto dentro do contêiner de progresso */
+}
+
+.progress-bar {
+  width: 100%; /* Largura total da barra de progresso */
+  background-color: var(--cor-branco); /* Cor de fundo da barra de progresso */
+  border-radius: 5px; /* Arredonda os cantos da barra de progresso */
+  height: 20px; /* Altura da barra de progresso */
+  position: relative; /* Permite posicionamento absoluto dos filhos */
+}
+
+.progress-bar span {
+  display: block; /* Exibe o span como bloco */
+  height: 100%; /* Altura total do span */
+  background-color: var(--cor-verde); /* Cor de fundo do span */
+  width: 0; /* Largura inicial do span (0% de progresso) */
+  border-radius: 5px; /* Arredonda os cantos do span */
+  position: absolute; /* Posiciona o span de forma absoluta */
+  top: 0; /* Posiciona no topo da barra */
+  left: 0; /* Posiciona à esquerda da barra */
+}
+
+.score {
+    font-size: 1em; /* Tamanho da fonte da pontuação */
+    margin-top: 10px; /* Adiciona margem superior à pontuação */
+}

@@ -1,0 +1,66 @@
+header {
+  background-color: var(--cor-verde); /* Define a cor de fundo do cabeçalho */
+  color: var(--cor-branco); /* Define a cor do texto do cabeçalho */
+  padding: 10px 15px; /* Adiciona preenchimento ao cabeçalho */
+  text-align: center; /* Centraliza o texto */
+
+  display: flex; /* Usa flexbox para o layout da barra de navegação */
+  justify-content: space-between; /* Espaça os itens uniformemente */
+  align-items: center; /* Alinha os itens verticalmente */
+}
+
+.logo {
+  width: 180px;
+}
+
+header .nav-links {
+  list-style: none; /* Remove marcadores da lista */
+  display: flex; /* Usa flexbox para itens de navegação */
+}
+
+header .nav-links li {
+  margin: 10px 15px; /* Adiciona margem aos itens da lista */
+}
+
+header .nav-links a {
+  text-decoration: none; /* Remove o sublinhado dos links */
+  color: var(--cor-branco); /* Cor do texto dos links */
+  font-size: 0.9rem; /* Tamanho da fonte dos links */
+  transition: color 0.3s; /* Transição suave na cor */
+  padding: 0.4rem; /* Adiciona preenchimento aos links */
+}
+
+header .nav-links a:hover {
+  color: var(--cor-branco); /* Cor ao passar o mouse sobre os links */
+  background-color: var(--cor-preto); /* Fundo ao passar o mouse sobre os links */
+  border-radius: 5px; /* Arredonda os cantos do fundo */
+}
+
+.navbar-content{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 20%;
+  min-width: 300px;
+}
+
+@media (max-width: 768px) {
+  .navbar .nav-links.active {
+      display: flex; /* Mostra links de navegação ativos em telas menores */
+  }
+
+  .navbar .nav-links li {
+      margin: 10px 0; /* Ajusta a margem dos itens de navegação */
+  }
+}
+
+@media (max-width: 500px) {
+  header {
+    padding: 25px 10px; /* Adiciona preenchimento ao cabeçalho */
+
+    flex-direction: column;
+    justify-content: center;
+
+    row-gap: 25px;
+  }
+}

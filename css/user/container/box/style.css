@@ -1,0 +1,22 @@
+.box {
+  margin: auto;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  background: var(--cor-caqui);
+
+  padding: 10px;
+
+  border-radius: 10px;
+
+  filter: drop-shadow(0 0 0.75rem rgb(0, 0, 0));
+}
+
+.box:nth-child(odd){
+  color: #fff;
+  background-color: var(--cor-verde);
+}

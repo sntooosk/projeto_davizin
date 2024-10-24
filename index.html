@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ReportTec</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <link rel="stylesheet" href="css/user/estilo.css" />
+
+    <link rel="stylesheet" href="css/user/header/navbar.css" />
+    <link rel="stylesheet" href="css/user/header/pontuacao.css" />
+    <link rel="stylesheet" href="css/user/header/relata.css" />
+
+    <link rel="stylesheet" href="css/user/subnav/style.css" />
+
+    <link rel="stylesheet" href="css/user/container/style.css" />
+
+    <link rel="stylesheet" href="css/user/container/box/style.css" />
+    <link rel="stylesheet" href="css/user/container/box/info.css" />
+    <link rel="stylesheet" href="css/user/container/box/image.css" />
+
+    <link rel="stylesheet" href="css/user/container/game/style.css" />
+    <link rel="stylesheet" href="css/user/container/game/progress.css" />
+    <link rel="stylesheet" href="css/user/container/game/final.css" />
+
+    <link rel="stylesheet" href="css/user/footer/style.css" />
+
+    <script src="js/scroll.js"></script>
+    <script src="js/form.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/game.js" defer></script>
+    <script src="js/saveTexts.js" type="module"></script>
+  </head>
+  <body>
+    <header class="navbar">
+      <img
+        class="logo"
+        src="imgs/logobranca.png"
+        width="150"
+        height="70"
+        alt="Logo"
+      />
+      <img
+        class="logo"
+        src="imgs/logoetec.png"
+        width="120"
+        height="70"
+        alt="Logo"
+      />
+      <div class="navbar-content">
+        <div class="progress">
+          <div class="main-progress-bar">
+            <span id="main-progress-bar-span"></span>
+          </div>
+          <div class="main-score" id="main-score">Pontuação Total: 0</div>
+        </div>
+        <a class="navigation" href="#" onclick="toggleForm()">Relatar</a>
+      </div>
+    </header>
+    <nav class="subnavbar">
+      <button class="menu-toggle" onclick="toggleMenu()">&#9776;</button>
+      <ul class="subnav-links">
+        <li>
+          <a href="javascript:void(0);" onclick="scrollToTarget('bullying')"
+            >Bullying</a
+          >
+        </li>
+        <li>
+          <a
+            href="javascript:void(0);"
+            onclick="scrollToTarget('cyberbullying')"
+            >Cyberbullying</a
+          >
+        </li>
+        <li>
+          <a
+            href="javascript:void(0);"
+            onclick="scrollToTarget('bullyingescola')"
+            >Bullying na escola</a
+          >
+        </li>
+        <li>
+          <a
+            href="javascript:void(0);"
+            onclick="scrollToTarget('tiposbullying')"
+            >Tipos de bullying</a
+          >
+        </li>
+        <li>
+          <a href="javascript:void(0);" onclick="scrollToTarget('ocasiona')"
+            >O que ocasiona?</a
+          >
+        </li>
+        <li>
+          <a href="javascript:void(0);" onclick="scrollToTarget('impactos')"
+            >Impactos/Consequências</a
+          >
+        </li>
+        <li>
+          <a href="javascript:void(0);" onclick="scrollToTarget('intervir')"
+            >Intervenção</a
+          >
+        </li>
+      </ul>
+    </nav>
+    <div class="form-borda" style="display: none">
+      <div class="form-container" id="relata">
+        <h1>Relatar</h1>
+        <form>
+          <div class="form-group">
+            <label>Relate seu depoimento abaixo:</label>
+          </div>
+          <div class="form-group">
+            <textarea type="text" id="textInput"></textarea>
+          </div>
+          <div class="form-group">
+            <button type="submit" id="btnsalvar">Enviar</button>
+          </div>
+          <div class="form-group-exit" onclick="toggleForm(-1)">
+            <p>Sair</p>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="container">
+      <div class="box box-info">
+        <h2 id="bullying">O Que é Bullying?</h2>
+        <p>
+          O bullying é um comportamento agressivo e repetido que ocorre entre estudantes, caracterizado pela intenção de causar dor ou humilhação. Pode manifestar-se de diversas formas, como agressões físicas, verbais ou sociais. Muitas vezes, a vítima se sente isolada e vulnerável, impactando sua autoestima e saúde mental. O bullying não afeta apenas a vítima, mas também os agressores e os espectadores, criando um ambiente escolar hostil. Para combater essa prática, é fundamental promover um ambiente de respeito e empatia, além de incentivar a denúncia e a intervenção adequada.
+        </p>
+      </div>
+      <div class="box">
+        <div class="column">
+          <div class="container-game" id="quiz2">
+            <div class="question" id="question2">
+              <p>Pergunta relacionada ao bullying?</p>
+            </div>
+            <div class="options" id="options2">
+              <button onclick="checkAnswer(1, 'A', this)">A. Bullying</button>
+              <button onclick="checkAnswer(1, 'B', this)">
+                B. Cyberbullying
+              </button>
+              <button onclick="checkAnswer(1, 'C', this)">
+                C. Bullying escolar
+              </button>
+              <button onclick="checkAnswer(1, 'D', this)">D. Outro</button>
+            </div>
+            <div class="message" id="message2"></div>
+            <div class="progress-container" id="progress2">
+              <div class="progress-bar">
+                <span id="progress-bar-span2"></span>
+              </div>
+              <div class="score" id="score2">Pontuação: 0</div>
+            </div>
+            <div class="final-screen" id="final-screen2">
+              <h2>Fim do Quiz!</h2>
+              <div class="score" id="final-score2">Pontuação Final: 0</div>
+              <button onclick="restartQuiz(1)">Tentar Novamente</button>
+              <button onclick="finishQuiz(1)">Finalizar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="box box-info">
+        <h2 id="cyberbullying">O Que é Cyberbullying?</h2>
+        <p>
+          O cyberbullying refere-se ao uso da tecnologia, como redes sociais, mensagens de texto e aplicativos, para assediar, humilhar ou ameaçar outra pessoa. Diferente do bullying tradicional, o cyberbullying pode acontecer 24 horas por dia, tornando-se uma ameaça constante. A rapidez e o alcance das mensagens tornam difícil para as vítimas escapar da situação. Além disso, a falta de empatia online pode intensificar a agressão, já que os agressores se sentem menos responsáveis por suas ações. Combater o cyberbullying requer conscientização sobre a segurança digital e a promoção de um comportamento respeitoso nas plataformas online.
+        </p>
+      </div>
+      <div class="box box-img">
+        <img src="imgs/bullying1.jpg" width="100px" height="100px" />
+      </div>
+      <div class="box box-info">
+        <h2 id="bullyingescola">Bullying na escola</h2>
+        <p>
+          O bullying nas escolas é um fenômeno preocupante, que afeta o ambiente educativo e o bem-estar dos alunos. Muitas vezes, as vítimas enfrentam isolamento social, ansiedade e dificuldades de aprendizagem. As escolas devem ser locais seguros, e a presença do bullying compromete essa segurança. É fundamental que educadores e funcionários reconheçam os sinais de bullying e intervenham de maneira eficaz. Programas de prevenção e sensibilização, que promovam o respeito e a inclusão, são essenciais para criar uma cultura escolar positiva, onde todos os alunos se sintam valorizados e protegidos.
+        </p>
+      </div>
+      <div class="box box-img">
+        <img src="imgs/bullying2.jpg" width="100px" height="100px" />
+      </div>
+      <div class="box box-info">
+        <h2 id="tiposbullying">Tipos de Bullying</h2>
+        <p>
+          O bullying pode ser causado por uma combinação de fatores sociais, psicológicos e ambientais. Muitas vezes, agressores são influenciados por comportamentos aprendidos em casa, na mídia ou entre pares. Fatores como insegurança, busca por poder ou aceitação social podem motivar o comportamento agressivo. Além disso, características pessoais da vítima, como aparência, habilidades ou orientação sexual, podem torná-las alvos. A falta de supervisão e um ambiente escolar que não promove a empatia podem facilitar o bullying. Para prevenir, é fundamental abordar essas questões em casa e na escola, promovendo um ambiente de respeito e compreensão.
+        </p>
+      </div>
+      <div class="box box-img">
+        <img src="imgs/bullying3.jpg" width="100px" height="100px" />
+      </div>
+      <div class="box box-info">
+        <h2 id="ocasiona">O que ocasiona?</h2>
+        <p>
+          O bullying pode ser causado por uma combinação de fatores sociais, psicológicos e ambientais. Muitas vezes, agressores são influenciados por comportamentos aprendidos em casa, na mídia ou entre pares. Fatores como insegurança, busca por poder ou aceitação social podem motivar o comportamento agressivo. Além disso, características pessoais da vítima, como aparência, habilidades ou orientação sexual, podem torná-las alvos. A falta de supervisão e um ambiente escolar que não promove a empatia podem facilitar o bullying. Para prevenir, é fundamental abordar essas questões em casa e na escola, promovendo um ambiente de respeito e compreensão.
+        </p>
+      </div>
+      <div class="box box-img">
+        <img src="imgs/bullying4.jpg" width="100px" height="100px" />
+      </div>
+      <div class="box box-info">
+        <h2 id="impactos">Consequências</h2>
+        <p>
+          As consequências do bullying são profundas e podem durar a vida toda. As vítimas frequentemente enfrentam problemas emocionais, como ansiedade, depressão e baixa autoestima. No ambiente escolar, o desempenho acadêmico pode ser prejudicado, levando a um desinteresse pelo aprendizado. Além disso, a experiência de ser alvo de bullying pode afetar a vida social da vítima, causando isolamento e dificuldade em formar relacionamentos saudáveis. As consequências também podem se estender aos agressores, que, se não receberem apoio, podem desenvolver comportamentos antissociais ou de risco. A promoção de intervenções eficazes é crucial para mitigar esses impactos.
+        </p>
+      </div>
+      <div class="box">
+        <div class="column">
+          <div class="container-game" id="quiz1">
+            <div class="question" id="question1">
+              <p>Pergunta relacionada ao bullying?</p>
+            </div>
+            <div class="options">
+              <button onclick="checkAnswer(0, 'A', this)">A. Bullying</button>
+              <button onclick="checkAnswer(0, 'B', this)">
+                B. Cyberbullying
+              </button>
+              <button onclick="checkAnswer(0, 'C', this)">
+                C. Bullying escolar
+              </button>
+              <button onclick="checkAnswer(0, 'D', this)">D. Outro</button>
+            </div>
+            <div class="message" id="message1"></div>
+            <div class="progress-container">
+              <div class="progress-bar">
+                <span id="progress-bar-span1"></span>
+              </div>
+              <div class="score" id="score1">Pontuação: 0</div>
+            </div>
+            <div class="final-screen" id="final-screen1">
+              <h2>Fim do Quiz 1!</h2>
+              <div class="score" id="final-score1">Pontuação Final: 0</div>
+              <button onclick="restartQuiz(0)">Tentar Novamente</button>
+              <button onclick="finishQuiz(0)">Finalizar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="box box-info">
+        <h2 id="intervir">Intervenção</h2>
+        <p>
+          A intervenção em casos de bullying é fundamental para proteger as vítimas e mudar o comportamento dos agressores. É essencial que educadores, pais e alunos estejam envolvidos no processo. Programas de conscientização que promovem empatia, respeito e resolução pacífica de conflitos podem ser eficazes. A criação de um ambiente escolar acolhedor, onde todos se sintam seguros para se expressar, é vital. É importante também oferecer suporte psicológico às vítimas e intervenções para os agressores, abordando a raiz do problema. Com ações coletivas e uma comunicação aberta, é possível reduzir significativamente a incidência de bullying nas escolas.
+        </p>
+      </div>
+    </div>
+    <footer>
+      <p>&copy; 2024 ReportTec</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+.filter{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+
+  column-gap: 20px;
+
+  background-color: var(--cor-preto);
+
+  width: 100%;
+  padding: 5px 10px;
+
+  color: #fff;
+}
+
+.filter-box{
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  column-gap: 10px;
+}
+
+.filter-section{
+  display: flex;
+  flex-direction: column;
+
+  color: #fff;
+}
+
+button {
+  background-color: #007bff; /* Cor de fundo do botão */
+  color: #fff; /* Cor do texto do botão */
+  border: none; /* Remove a borda padrão do botão */
+  padding: 10px 20px; /* Preenchimento interno do botão */
+  margin: 20px 0; /* Margem vertical ao redor do botão */
+  cursor: pointer; /* Muda o cursor ao passar sobre o botão */
+  font-size: 1rem; /* Tamanho da fonte do botão */
+}
+
+button:hover {
+  background-color: #0056b3; /* Cor de fundo do botão ao passar o mouse */
+}

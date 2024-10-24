@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfico de Classificações</title>
+    <style>
+        #chartContainer {
+            width: 80%;
+            height: 400px;
+            margin: auto;
+        }
+        body {
+            background-color: rgb(173, 177, 177);
+        }
+        #navContainer {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+    <!-- Usando a versão UMD do Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js';
+        import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/10.3.0/firebase-database.js';
+
+        // Configuração do Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBrRuiOk8rjxO6jH91v--LPuwwyIrZPiH8",
+            authDomain: "bdreporttec.firebaseapp.com",
+            databaseURL: "https://bdreporttec-default-rtdb.firebaseio.com",
+            projectId: "bdreporttec",
+            storageBucket: "bdreporttec.appspot.com",
+            messagingSenderId: "153475202057",
+            appId: "1:153475202057:web:2fa40b7f784e765b940cd8",
+            measurementId: "G-LX51TDQBJM"
+        };
+
+        // Inicializando o Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        let chart; // Variável global para armazenar o gráfico
+        let currentPeriod = 0; // Controlador do período atual (0 = Jan-Jun, 1 = Jul-Dez)
+
+        // Função para carregar as classificações dos textos do Firebase
+        function loadClassifications() {
+            const textsRef = ref(database, 'textos');
+            onValue(textsRef, (snapshot) => {
+                const texts = snapshot.val();
+                if (texts) {
+                    const classificationData = {
+                        'Assédio': [],
+                        'Cyberbullying': [],
+                        'Racismo': [],
+                        'Opção 4': [],
+                        'Opção 5': []
+                    };
+                    const labels = [];
+
+                    // Organizando os dados por classificação e criando labels baseados no timestamp
+                    Object.keys(texts).forEach(key => {
+                        const text = texts[key];
+                        const classification = text.classification || 'Indefinido';
+                        const timestamp = text.timestamp ? new Date(text.timestamp).toLocaleDateString('pt-BR') : 'Data Desconhecida';
+                        
+                        if (!labels.includes(timestamp)) {
+                            labels.push(timestamp);
+                        }
+
+                        if (classificationData[classification]) {
+                            classificationData[classification].push(1);
+                        }
+
+                        Object.keys(classificationData).forEach(cat => {
+                            while (classificationData[cat].length < labels.length) {
+                                classificationData[cat].push(0);
+                            }
+                        });
+                    });
+
+                    // Renderiza o gráfico com os dados carregados
+                    renderChart(labels, classificationData);
+                }
+            });
+        }
+
+        // Função para renderizar o gráfico
+        function renderChart(labels, classificationData) {
+            const ctx = document.getElementById('myChart').getContext('2d');
+            
+            const datasets = Object.keys(classificationData).map((classification, index) => ({
+                label: classification,
+                data: classificationData[classification],
+                fill: false,
+                borderColor: getBorderColor(index),
+                tension: 0.1
+            }));
+
+            // Definir os meses visíveis com base no período atual
+            const visibleLabels = getVisibleLabels(labels);
+            const visibleData = filterDataByPeriod(classificationData, labels);
+
+            if (chart) {
+                chart.destroy(); // Destruir gráfico anterior antes de renderizar outro
+            }
+
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: visibleLabels,
+                    datasets: Object.keys(visibleData).map((classification, index) => ({
+                        label: classification,
+                        data: visibleData[classification],
+                        fill: false,
+                        borderColor: getBorderColor(index),
+                        tension: 0.1
+                    }))
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1, // Ajusta o intervalo dos ticks
+                                callback: function(value) {
+                                    return value; // Exibe os valores dos ticks
+                                }
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                autoSkip: true,
+                                maxTicksLimit: 6 // Limita o número de labels visíveis no eixo X
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Função para retornar uma cor diferente para cada linha
+        function getBorderColor(index) {
+            const colors = [
+                'rgb(75, 192, 192)',
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 205, 86)',
+                'rgb(153, 102, 255)'
+            ];
+            return colors[index % colors.length];
+        }
+
+        // Função para retornar os labels visíveis com base no período atual
+        function getVisibleLabels(labels) {
+            const periodStart = currentPeriod * 6;
+            return labels.slice(periodStart, periodStart + 6);
+        }
+
+        // Função para filtrar os dados do gráfico com base no período atual
+        function filterDataByPeriod(classificationData, labels) {
+            const periodStart = currentPeriod * 6;
+            const visibleData = {};
+
+            Object.keys(classificationData).forEach(classification => {
+                visibleData[classification] = classificationData[classification].slice(periodStart, periodStart + 6);
+            });
+
+            return visibleData;
+        }
+
+        // Função para avançar o período
+        function nextPeriod() {
+            currentPeriod += 1;
+            loadClassifications();
+        }
+
+        // Função para retroceder o período
+        function previousPeriod() {
+            if (currentPeriod > 0) {
+                currentPeriod -= 1;
+                loadClassifications();
+            }
+        }
+
+        // Carregar classificações ao carregar o documento
+        document.addEventListener('DOMContentLoaded', loadClassifications);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('btnanterior').addEventListener('click', () => {
+                previousPeriod();
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('btnprox').addEventListener('click', () => {
+                nextPeriod();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="chartContainer">
+        <canvas id="myChart"></canvas>
+    </div>
+    <div id="navContainer">
+        <button id="btnanterior">← Anterior</button>
+        <button id="btnprox">Próximo →</button>
+    </div>
+</body>
+</html>

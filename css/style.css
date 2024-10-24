@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --cor-preto: #303030;
+  --cor-branco: #e8e8e8;
+  --cor-verde: #2b5200;
+  --cor-osso: #cdcdcd;
+  --cor-caqui: #b0b2b2;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  color: var(--cor-preto);
+}

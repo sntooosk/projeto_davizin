@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Perguntas e Respostas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+        }
+        .quizzes-container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 45%;
+            margin: 20px 0;
+        }
+        .question {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        .options {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .options button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin: 5px 0;
+            cursor: pointer;
+            font-size: 1em;
+            width: 100%;
+            text-align: left;
+        }
+        .options button:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+        .progress-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .progress-bar {
+            width: 100%;
+            background-color: #ddd;
+            border-radius: 5px;
+            height: 20px;
+            position: relative;
+        }
+        .progress-bar span {
+            display: block;
+            height: 100%;
+            background-color: #007bff;
+            width: 0;
+            border-radius: 5px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .score {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        .final-screen {
+            display: none;
+            text-align: center;
+        }
+        .final-screen button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .final-screen button:hover {
+            background-color: #0056b3;
+        }
+        .main-progress-bar {
+            width: 100%;
+            background-color: #ddd;
+            border-radius: 5px;
+            height: 20px;
+            position: relative;
+            margin: 20px 0;
+        }
+        .main-progress-bar span {
+            display: block;
+            height: 100%;
+            background-color: #28a745;
+            width: 0;
+            border-radius: 5px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .main-score {
+            font-size: 1.5em;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <h2>Barra de Pontuação Principal</h2>
+        <div class="main-progress-bar">
+            <span id="main-progress-bar-span"></span>
+        </div>
+        <div class="main-score" id="main-score">Pontuação Total: 0</div>
+    </div>
+    <div class="quizzes-container">
+        <div class="container" id="quiz1">
+            <h2>Quiz 1</h2>
+            <div class="question" id="question1">Qual é a capital da França?</div>
+            <div class="options">
+                <button onclick="checkAnswer(0, 'A', this)">A. Paris</button>
+                <button onclick="checkAnswer(0, 'B', this)">B. Londres</button>
+                <button onclick="checkAnswer(0, 'C', this)">C. Roma</button>
+                <button onclick="checkAnswer(0, 'D', this)">D. Berlim</button>
+            </div>
+            <div class="message" id="message1"></div>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <span id="progress-bar-span1"></span>
+                </div>
+                <div class="score" id="score1">Pontuação: 0</div>
+            </div>
+            <div class="final-screen" id="final-screen1">
+                <h2>Fim do Quiz 1!</h2>
+                <div class="score" id="final-score1">Pontuação Final: 0</div>
+                <button onclick="restartQuiz(0)">Tentar Novamente</button>
+                <button onclick="finishQuiz(0)">Finalizar</button>
+            </div>
+        </div>
+        <div class="container" id="quiz2">
+            <h2>Quiz 2</h2>
+            <div class="question" id="question2">Qual é a maior montanha do mundo?</div>
+            <div class="options">
+                <button onclick="checkAnswer(1, 'A', this)">A. K2</button>
+                <button onclick="checkAnswer(1, 'B', this)">B. Kilimanjaro</button>
+                <button onclick="checkAnswer(1, 'C', this)">C. Everest</button>
+                <button onclick="checkAnswer(1, 'D', this)">D. Denali</button>
+            </div>
+            <div class="message" id="message2"></div>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <span id="progress-bar-span2"></span>
+                </div>
+                <div class="score" id="score2">Pontuação: 0</div>
+            </div>
+            <div class="final-screen" id="final-screen2">
+                <h2>Fim do Quiz 2!</h2>
+                <div class="score" id="final-score2">Pontuação Final: 0</div>
+                <button onclick="restartQuiz(1)">Tentar Novamente</button>
+                <button onclick="finishQuiz(1)">Finalizar</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const MAX_QUESTIONS_MAIN_PROGRESS = 8;
+        let totalScore = 0;
+
+        const quizzes = [
+            {
+                element: 'quiz1',
+                questions: [
+                {
+                    question: 'Pergunta relacionada ao bullying?',
+                    options: { A: 'Bullying', B: 'Cyberbullying', C: 'Bullying escolar', D: 'Outro' },
+                    correctAnswer: 'A'
+                },
+                {
+                    question: 'Pergunta relacionada ao bullying?',
+                    options: { A: 'Bullying', B: 'Cyberbullying', C: 'Bullying escolar', D: 'Outro' },
+                    correctAnswer: 'B'
+                },
+                {
+                    question: 'Pergunta relacionada ao bullying?',
+                    options: { A: 'Bullying', B: 'Cyberbullying', C: 'Bullying escolar', D: 'Outro' },
+                    correctAnswer: 'C'
+                },
+                {
+                    question: 'Pergunta relacionada ao bullying?',
+                    options: { A: 'Bullying', B: 'Cyberbullying', C: 'Bullying escolar', D: 'Outro' },
+                    correctAnswer: 'D'
+                }
+                ],
+                currentQuestionIndex: 0,
+                score: 0,
+                hasAnswered: false
+            },
+            {
+                element: 'quiz2',
+                questions: [
+                    {
+                        question: 'Qual é a maior montanha do mundo?',
+                        options: { A: 'K2', B: 'Kilimanjaro', C: 'Everest', D: 'Denali' },
+                        correctAnswer: 'C'
+                    },
+                    {
+                        question: 'Qual é o animal mais rápido do mundo?',
+                        options: { A: 'Guepardo', B: 'Falcão-peregrino', C: 'Leopardo', D: 'Tigre' },
+                        correctAnswer: 'B'
+                    },
+                    {
+                        question: 'Qual é o maior deserto do mundo?',
+                        options: { A: 'Saara', B: 'Gobi', C: 'Kalahari', D: 'Antártida' },
+                        correctAnswer: 'D'
+                    },
+                    {
+                        question: 'Quem pintou a Mona Lisa?',
+                        options: { A: 'Leonardo da Vinci', B: 'Michelangelo', C: 'Raphael', D: 'Donatello' },
+                        correctAnswer: 'A'
+                    }
+                ],
+                currentQuestionIndex: 0,
+                score: 0,
+                hasAnswered: false
+            }
+        ];
+
+        function displayQuestion(quizIndex) {
+            const quiz = quizzes[quizIndex];
+            const questionElement = document.getElementById(`question${quizIndex + 1}`);
+            const optionsElement = document.querySelector(`#${quiz.element} .options`);
+            const question = quiz.questions[quiz.currentQuestionIndex];
+            questionElement.textContent = question.question;
+
+            optionsElement.innerHTML = '';
+            for (const [key, value] of Object.entries(question.options)) {
+                const button = document.createElement('button');
+                button.textContent = `${key}. ${value}`;
+                button.onclick = () => checkAnswer(quizIndex, key, button);
+                optionsElement.appendChild(button);
+            }
+
+            document.getElementById(`message${quizIndex + 1}`).textContent = '';
+            quiz.hasAnswered = false;
+        }
+
+        function checkAnswer(quizIndex, answer, button) {
+            const quiz = quizzes[quizIndex];
+            if (quiz.hasAnswered) return;
+
+            const correctAnswer = quiz.questions[quiz.currentQuestionIndex].correctAnswer;
+            const messageElement = document.getElementById(`message${quizIndex + 1}`);
+            if (answer === correctAnswer) {
+                messageElement.textContent = 'Correto!';
+                quiz.score = Math.min(quiz.score + 1, quiz.questions.length);
+                updateScore(quizIndex);
+            } else {
+                messageElement.textContent = 'Incorreto. Tente novamente!';
+            }
+
+            const buttons = document.querySelectorAll(`#${quiz.element} .options button`);
+            buttons.forEach(btn => btn.disabled = true);
+
+            quiz.hasAnswered = true;
+            setTimeout(() => nextQuestion(quizIndex), 2000);
+        }
+
+        function updateScore(quizIndex) {
+            const quiz = quizzes[quizIndex];
+            const scoreElement = document.getElementById(`score${quizIndex + 1}`);
+            const progressBarSpan = document.getElementById(`progress-bar-span${quizIndex + 1}`);
+            const progressWidth = (quiz.score / quiz.questions.length) * 100;
+            scoreElement.textContent = `Pontuação: ${quiz.score} de ${quiz.questions.length}`;
+            progressBarSpan.style.width = `${progressWidth}%`;
+        }
+
+        function finishQuiz(quizIndex) {
+            const quiz = quizzes[quizIndex];
+            totalScore += quiz.score;
+            updateMainScore();
+            alert(`Obrigado por jogar! Sua pontuação final foi ${quiz.score}`);
+        }
+
+        function updateMainScore() {
+            const totalQuestions = MAX_QUESTIONS_MAIN_PROGRESS;
+            const mainScoreElement = document.getElementById('main-score');
+            const mainProgressBarSpan = document.getElementById('main-progress-bar-span');
+            const mainProgressWidth = (totalScore / totalQuestions) * 100;
+            mainScoreElement.textContent = `Pontuação Total: ${totalScore} de ${totalQuestions}`;
+            mainProgressBarSpan.style.width = `${mainProgressWidth}%`;
+        }
+
+        function nextQuestion(quizIndex) {
+            const quiz = quizzes[quizIndex];
+            if (quiz.currentQuestionIndex < quiz.questions.length - 1) {
+                quiz.currentQuestionIndex++;
+                displayQuestion(quizIndex);
+            } else {
+                showFinalScreen(quizIndex);
+            }
+        }
+
+        function showFinalScreen(quizIndex) {
+            const finalScreen = document.getElementById(`final-screen${quizIndex + 1}`);
+            finalScreen.style.display = 'block';
+            document.getElementById(`final-score${quizIndex + 1}`).textContent = `Pontuação Final: ${quizzes[quizIndex].score}`;
+        }
+
+        function restartQuiz(quizIndex) {
+            const quiz = quizzes[quizIndex];
+            quiz.currentQuestionIndex = 0;
+            quiz.score = 0;
+            document.getElementById(`progress-bar-span${quizIndex + 1}`).style.width = '0';
+            document.getElementById(`final-screen${quizIndex + 1}`).style.display = 'none';
+            displayQuestion(quizIndex);
+            updateScore(quizIndex);
+        }
+
+        displayQuestion(0);
+        displayQuestion(1);
+    </script>
+</body>
+</html>
